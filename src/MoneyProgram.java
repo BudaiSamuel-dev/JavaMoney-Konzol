@@ -4,12 +4,13 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.classfile.constantpool.PackageEntry;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class MoneyProgram {
 
-    private final static File FILE = new File("C:\\Dev\\FeladatForrasok\\BudaiS\\money-data.txt");
-    private final static File FILE_OUT = new File("C:\\Dev\\FeladatForrasok\\BudaiS\\money-kiadások.txt");
+    private final static File FILE = new File("/home/budaisamuel/Developer/Sources/money-data.txt");
+    private final static File FILE_OUT = new File("/home/budaisamuel/Developer/Sources/money-kiadások.txt");
 
     public static void main(String[] args) {
         ArrayList<Penzmozgas> lista = new ArrayList<>();
@@ -92,8 +93,14 @@ public class MoneyProgram {
                 }
             }
 
+            //Kiadások sortolása
+            //kiadasok.sort();
 
-
+            for(Penzmozgas penzmozgas : kiadasok){
+                String sor = String.format("%s -> %s (%d Ft)\n", penzmozgas.getDatum(), penzmozgas.getMegnevezes(), penzmozgas.getOsszeg());
+                fileWriter.write(sor);
+            }
+            fileWriter.flush();
             fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
