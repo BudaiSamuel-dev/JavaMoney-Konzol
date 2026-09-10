@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.classfile.constantpool.PackageEntry;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Scanner;
 
@@ -86,7 +87,7 @@ public class MoneyProgram {
         try {
             FileWriter fileWriter = new FileWriter(FILE_OUT);
 
-            ArrayList<Penzmozgas> kiadasok = new ArrayList<>();
+            ArrayList<Penzmozgas> kiadasok = new ArrayList<Penzmozgas>();
             for (Penzmozgas penzmozgas : lista){
                 if (penzmozgas.getTipus() == 'K'){
                     kiadasok.add(penzmozgas);
@@ -94,7 +95,7 @@ public class MoneyProgram {
             }
 
             //Kiadások sortolása
-            //kiadasok.sort();
+            kiadasok.sort(Comparator.comparingInt(Penzmozgas::getOsszeg).reversed());
 
             for(Penzmozgas penzmozgas : kiadasok){
                 String sor = String.format("%s -> %s (%d Ft)\n", penzmozgas.getDatum(), penzmozgas.getMegnevezes(), penzmozgas.getOsszeg());
